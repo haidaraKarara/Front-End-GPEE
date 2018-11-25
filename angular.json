@@ -43,12 +43,16 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/app/auth/static/images/templates/semantic-ui"
             ],
             "styles": [
+              "semantic/dist/semantic.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "semantic/dist/semantic.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -104,7 +108,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
