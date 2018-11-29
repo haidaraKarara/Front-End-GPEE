@@ -15,21 +15,24 @@ import { StudentListComponent } from './student-list/student-list.component';
 import { StudentFormComponent } from './student-list/student-form/student-form.component';
 import { SingleStudentComponent } from './student-list/single-student/single-student.component';
 import { PaymentStatisticsComponent } from './payment-statistics/payment-statistics.component';
-import { ClassStatisticsComponent } from './payment-statistics/class-statistics/class-statistics.component'
+import { ClassStatisticsComponent } from './payment-statistics/class-statistics/class-statistics.component';
+import { ClassFormComponent } from './class-list/class-form/class-form.component'
+import { httpInterceptorProviders } from './http-interceptors';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    AccueilComponent,
     HeaderComponent,
+    AccueilComponent,
     ClassListComponent,
     SingleClassComponent,
     StudentListComponent,
     StudentFormComponent,
     SingleStudentComponent,
     PaymentStatisticsComponent,
-    ClassStatisticsComponent
+    ClassStatisticsComponent,
+    ClassFormComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,9 @@ import { ClassStatisticsComponent } from './payment-statistics/class-statistics/
     HttpClientModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    httpInterceptorProviders
+
   ],
   bootstrap: [AppComponent]
 })

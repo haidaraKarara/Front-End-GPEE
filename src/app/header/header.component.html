@@ -1,14 +1,43 @@
-<div class="ui clearing segment">
-  <h2 class="ui left floated header">
-    <img class="ui  image" src="assets/logo.png"/>
-    <div class="content">
-      Learn More
+<div class="ui top attached stackable menu" style="margin-top:0.2em">
+    <div class="ui container stackable" *ngIf="isAuth">
+      <div class="ui item floated header">
+          <img class="ui big circular image" src="assets/logo-education.jpg" style="width:3em"/>
+          <div class="content">
+            Éducation
+          </div>
+      </div>
+      <a class="item" routerLink="/home" routerLinkActive="active">
+        <i class="home icon"></i>
+        <span>Accueil</span>
+      </a>
+      <div class="ui simple dropdown item">
+          <span><i class="users icon"></i> Étudiants</span>       
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a class="item" routerLink="/students"><i class="users icon"></i>Liste des étudiant</a>
+            <a class="item" routerLink="/students/new"><i class="user plus icon"></i> Nouveau</a>
+          </div>
+        </div>
+      <a class="item" routerLink="/payment-statistics" routerLinkActive="active">
+        <i class="money bill alternate outline icon"></i> 
+        <span>Paiements</span>
+      </a>
+      <div class="ui simple dropdown item">
+          <span><i class="warehouse icon"></i> Classes</span>       
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a class="item" routerLink="/classes"><i class="newspaper icon"></i><i class="newspaper icon"></i>Liste des classes</a>
+          <a class="item" routerLink="/classes/new"><i class="plus icon"></i>Nouvelle classe</a>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui  action input">
+          <input type="text" placeholder="Matricule étudiant">
+          <div class="mini ui button">Go</div>
+        </div>
+      </div>
+      <p class="item">Suivi de paiment simplifié</p>
+      <a class="ui teal label right item" (click)="onSignOut()">Déconnexion</a>
+      
     </div>
-  </h2>
-  <h3 class="ui right floated header">
-    Go Forward
-  </h3>
-  <h3 class="ui right floated header">
-    Go Back
-  </h3>
-</div>
+  </div>

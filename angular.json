@@ -51,8 +51,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "semantic/dist/semantic.min.js"
-            ]
+              "semantic/dist/semantic.min.js"            ]
           },
           "configurations": {
             "production": {

@@ -1,34 +1,47 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { User } from '../models/User.model';
 import { HttpHeaders } from '@angular/common/http';
+import { throwError as ObservableThrowError} from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 
 @Injectable()
-export class AuthService {
-    // appareilsSubject = new Subject<Object>();
-    token: string;
-    httpOptions = {
-        headers: new HttpHeaders({
-          'Authorization': 'Token 34e3cd56df04f6ec4f25ce985a337daef7c766eb'
-        })
-      };
-    onConnect(user:User){
-        return this.httpClient
-        .post('http://127.0.0.1:8000/auth/api/login',user)
-        
+export class AuthService 
+{
+
+    private _urlConnect: string = 'http://127.0.0.1:8000/auth/api/login'
+    private _urlDisconnect:string = 'http://127.0.0.1:8000/auth/api/logout'
+
+    onSignIn(user:User){
+        return this.httpClient.post(this._urlConnect,user)
+                    .pipe(
+                        catchError(this.errorHandler)
+                    );
     }
 
-    disconnect(){
+    errorHandler(error:HttpErrorResponse)
+    {
+        if (error.error instanceof ErrorEvent) 
+        {
+            // A client-side or network error occurred. Handle it accordingly.
+            console.error('An error occurred:', error.error.message);
+        } 
+        else 
+        {
+            // The backend returned an unsuccessful response code.
+            // The response body may contain clues as to what went wrong,
+            console.error(
+                    `Backend returned code : ${error.status}`);
+        }
+        return ObservableThrowError(error || "Erreur serveur")
+    }
+
+    onSignOut(){
         return this.httpClient
-        .post('http://127.0.0.1:8000/auth/api/logout','',this.httpOptions)
+        .post(this._urlDisconnect,'')
         }
 
     constructor(private httpClient: HttpClient){}
-
-    // emitAppareilSubject() {
-    //     this.appareilsSubject.next(this.appareils.slice());
-    //   }
     
 }
-// http://127.0.0.1:8000/auth/api/logout

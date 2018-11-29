@@ -16,6 +16,7 @@ export class AuthComponent implements OnInit,OnDestroy {
   user: User
   token: Object;
   autSubscription: Subscription;
+  errorMessage : Object = null;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -36,39 +37,28 @@ export class AuthComponent implements OnInit,OnDestroy {
     });
   }
 
-  onSubmit() 
+  onSignIn() 
   {
     if(this.loginForm.valid)
     {
-      const username = this.loginForm.value['username']
-      const password = this.loginForm.value['password']
+      const username = this.loginForm.get('username').value
+      const password = this.loginForm.get('password').value
       this.user = new User(username,password)
-      this.autSubscription = this.authService.onConnect(this.user).subscribe(
+      this.autSubscription = this.authService.onSignIn(this.user).subscribe
+      (
         (value) => {
-          this.token = value
-          console.log('voici le token : '+this.token['token'])
+          this.token = value['token']
+          localStorage.setItem('userToken',this.token.toString())
+          this.router.navigate(['home']);
+          console.log('voici le token : '+this.token)
         },
         (error) => {
-          console.log('Erreur ! : ' +error);
+          this.errorMessage = error.error.error; // the last error proprety provide from the backend
+          console.log('Erreur ! : ' +this.errorMessage);
+
         }
       );
       // this.router.navigate(['/users']);
     }
-    else
-    {
-      console.log('Rien ne va')
-    }
-  }
-  disconnect()
-  {
-    this.autSubscription = this.authService.disconnect().subscribe(
-      (value) => {
-        const resp = value
-        console.log('Deconnexion -> message de retour : '+resp['success'])
-      },
-      (error) => {
-        console.log('Erreur ! : ' +error);
-      }
-    );
   }
 }
