@@ -50,15 +50,13 @@ export class AuthComponent implements OnInit,OnDestroy {
           this.token = value['token']
           localStorage.setItem('userToken',this.token.toString())
           this.router.navigate(['home']);
-          console.log('voici le token : '+this.token)
+          // console.log('voici le token : '+this.token)
         },
         (error) => {
-          this.errorMessage = error.error.error; // the last error proprety provide from the backend
-          console.log('Erreur ! : ' +this.errorMessage);
-
+          this.errorMessage = error.error['detail'];
+          console.log("Erreur :" +this.errorMessage);
         }
       );
-      // this.router.navigate(['/users']);
     }
   }
 }

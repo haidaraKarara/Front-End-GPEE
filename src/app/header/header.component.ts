@@ -21,15 +21,13 @@ export class HeaderComponent implements OnInit {
   {
     this.authService.onSignOut().subscribe(
       (value) => {
-        if(value['ok'])
-        {
-          localStorage.removeItem('userToken');
           this.router.navigate(['auth']);
-        }
-        console.log('Deconnexion -> message de retour : '+value['ok'])
+          localStorage.removeItem('userToken');
+          // console.log('Deconnexion -> message de retour : '+value)
+       
       },
-      (error) => {
-        console.log('Erreur ! : ' +error);
+      (errors) => {
+        console.log('Erreur ! : ' +errors.error['detail']);
       }
     );
   }

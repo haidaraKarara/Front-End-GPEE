@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/User.model';
-import { HttpHeaders } from '@angular/common/http';
 import { throwError as ObservableThrowError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -10,11 +9,13 @@ import { catchError } from 'rxjs/operators';
 export class AuthService 
 {
 
-    private _urlConnect: string = 'http://127.0.0.1:8000/auth/api/login'
-    private _urlDisconnect:string = 'http://127.0.0.1:8000/auth/api/logout'
-
+    private _urlConnect: string = 'http://127.0.0.1:8000/api/auth/login/'
+    private _urlDisconnect:string = 'http://127.0.0.1:8000/api/auth/logout/'
     onSignIn(user:User){
-        return this.httpClient.post(this._urlConnect,user)
+        const httpOptions = {
+            headers: new HttpHeaders({authorization: "Basic " + btoa(`${user.username}:${user.password}`)})
+            };
+        return this.httpClient.post(this._urlConnect,'',httpOptions)
                     .pipe(
                         catchError(this.errorHandler)
                     );
@@ -33,13 +34,18 @@ export class AuthService
             // The response body may contain clues as to what went wrong,
             console.error(
                     `Backend returned code : ${error.status}`);
+            console.error(
+                        `Backend returned message : ${error.statusText}`);
         }
         return ObservableThrowError(error || "Erreur serveur")
     }
-
+    
     onSignOut(){
-        return this.httpClient
-        .post(this._urlDisconnect,'')
+        // console.log('deconnexion yes')
+        return this.httpClient.post(this._urlDisconnect,'')
+            .pipe(
+                catchError(this.errorHandler)
+            );
         }
 
     constructor(private httpClient: HttpClient){}

@@ -23,32 +23,32 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'classes',
+    path: 'classes', // @fait dans le backend
     component: ClassListComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'classes/new',
+    path: 'classes/new', // @fait dans le backend
     component: ClassFormComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'classes/view/:id', // class id
+    path: 'classes/view/:id', //  @fait dans le backend
     component: SingleClassComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'students',
+    path: 'students', // doit être supprime ou pas ?
     component: StudentListComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'students/view/:id', // student id
+    path: 'students/view/:id', // @fait dans le backend
     component: SingleStudentComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'students/new',
+    path: 'students/new', // @fait dans le backend
     component: StudentFormComponent,
     canActivate: [AuthGuard],
   },
@@ -62,11 +62,13 @@ const routes: Routes = [
     component: ClassStatisticsComponent,
     canActivate: [AuthGuard],
   },
-  { path: '',
+  {
+    path: '',
     redirectTo: 'auth',
     pathMatch: 'full'
   },
-  { path: '**',
+  {
+    path: '**',
     redirectTo: 'auth',
   },
 ];
