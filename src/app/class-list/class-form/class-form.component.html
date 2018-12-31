@@ -1,4 +1,41 @@
-<app-header></app-header>
-<p>
-  class-form works!
-</p>
+<div class="ui red segment" style="padding: 1em;background-color:rgb(204, 228, 227)">
+    <app-header></app-header>
+</div>
+<div class="ui container">
+    <div class="ui red grid" style="margin-top:3em">
+            <div class="ui green inverted circular segment" *ngFor="let classe of listeClasse">
+                <h3 class="ui center aligned icon header">
+                    {{classe.libelle}}
+                    <div class="sub header" style="color:black">
+                                Total: <strong class="ui teal label">{{classe.eleves.length}}</strong> 
+                    </div>
+                </h3>
+            </div>
+        </div>
+        <div class="ui teal inverted segment">
+            <p class="ui error message" *ngIf="errorMessage !== null">{{ errorMessage }}</p>
+            <form class="ui form" (ngSubmit)="onCreateClass(classForm)" #classForm="ngForm">
+                <h3 class="ui icon olive center aligned header">
+                        Nouvelle classe
+                        <i class="plus icon"></i>
+                </h3>
+                <div class="field">
+                    <label for="classe">classe</label>
+                    <input type="text" [(ngModel)]="classInput" id="classe" name="classe"  placeholder="La classe" required #classe="ngModel">
+                    <div class="ui red label" *ngIf="classe.invalid && (classe.dirty || classe.touched)">
+                        <div *ngIf="classe.errors.required">
+                            Le nom de la classe est requis.
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <button class="big ui green button" [disabled]="classForm.invalid"  type="submit" >Valider</button>
+                </div>
+            </form>
+        </div>
+</div>
+
+<app-footer></app-footer>
+<router-outlet></router-outlet>
+    
+<!-- [disabled]="classForm.invalid" -->

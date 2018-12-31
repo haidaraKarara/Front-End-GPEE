@@ -1,5 +1,61 @@
-<app-header></app-header>
- <div class="ui container">
-      accueil works !
-      <router-outlet></router-outlet>
+  <div class="ui red segment" style="padding: 1em;background-color:rgb(204, 228, 227)">
+      <app-header></app-header>
   </div>
+    <div class="ui teal inverted segment" *ngIf="statistics !== null">
+      <div class="ui two cards">
+        <div class="red card">
+          <div class="image center">
+            <img src="assets/filles_garcons.jpg" style="width:11em;" class="ui centered Big image">
+          </div>
+          <div class="ui teal statistic">
+            <div class="value">
+              {{ statistics.nb_of_students }}
+            </div>
+            <div class="label">
+              Nombre d'élèves
+            </div>
+          </div>
+        </div>
+        <div class="red card">
+          <div class="image center">
+            <img src="assets/garcon.jpg" style="width:5em;" class="ui centered large image">
+          </div>
+          <div class="ui olive statistic">
+            <div class="value">
+              {{ statistics.nb_of_boys }}
+            </div>
+            <div class="label">
+              Nombre de garçons
+            </div>
+          </div>
+        </div>
+        <div class="red card">
+          <div class="image center">
+            <img src="assets/fille.jpg" style="width:5em;" class="ui centered large image">
+          </div>
+          <div class="ui purple statistic">
+            <div class="value">
+              {{ statistics.nb_of_girls }}
+            </div>
+            <div class="label">
+              Nombre de filles
+            </div>
+          </div>
+        </div>
+        <div class="red card">
+          <div class="image center">
+            <img src="assets/classe.jpg" style="width:5em;" class="ui centered large image">
+          </div>
+          <div class="ui yellow statistic">
+            <div class="value">
+              {{ statistics.nb_of_class }}
+            </div>
+            <div class="label">
+              Nombre de classes
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
+    <!-- <router-outlet></router-outlet> -->

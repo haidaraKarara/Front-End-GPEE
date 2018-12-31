@@ -27,7 +27,7 @@ export class AuthComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy() {
-    this.autSubscription.unsubscribe;
+    this.autSubscription.unsubscribe();
   }
 
   initForm() {

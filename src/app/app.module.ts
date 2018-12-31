@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
@@ -18,6 +19,10 @@ import { PaymentStatisticsComponent } from './payment-statistics/payment-statist
 import { ClassStatisticsComponent } from './payment-statistics/class-statistics/class-statistics.component';
 import { ClassFormComponent } from './class-list/class-form/class-form.component'
 import { httpInterceptorProviders } from './http-interceptors';
+import { FooterComponent } from './footer/footer.component';
+import { NgHttpLoaderModule } from 'ng-http-loader'; 
+import { ClassService } from './services/class.service';
+
 
 @NgModule({
   declarations: [
@@ -32,16 +37,21 @@ import { httpInterceptorProviders } from './http-interceptors';
     SingleStudentComponent,
     PaymentStatisticsComponent,
     ClassStatisticsComponent,
-    ClassFormComponent
+    ClassFormComponent,
+    FooterComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgHttpLoaderModule.forRoot(), // <============ Don't forget to call 'forRoot()'!
+
   ],
   providers: [
     AuthService,
+    ClassService,
     httpInterceptorProviders
 
   ],

@@ -1,4 +1,174 @@
-<app-header></app-header>
-<p>
-  student-form works!
-</p>
+<div class="ui red segment top">
+  <app-header></app-header>
+</div>
+<div class="ui container">
+  <div class="ui placeholder segment">
+    <form class="ui form" [formGroup]="newStudentForm" (ngSubmit)="onCreateStudent()">
+      <div class="ui two column very relaxed stackable grid">
+        <div class="column ">
+            <h3 class="ui blue center aligned icon header">
+                <i class="user plus icon"></i>
+                Infos Générales
+            </h3>
+            <h5 class="ui red center aligned icon header">
+                Tous les champs sont obligatoires
+            </h5>
+            <!-- first field  -->
+            <div class="field">
+              <label for="firstname">prénom</label>
+              <div class="ui left icon input">
+                <input type="text" formControlName="firstname" id="firstname"  placeholder="Prénom" required>
+                <i class="user icon"></i>      
+              </div>
+              <div class="ui red label" *ngIf="firstnameCtrl.invalid && firstnameCtrl.touched">
+                  <div *ngIf="firstnameCtrl.errors.required">
+                    Le Prénm est obligatoire.
+                  </div>
+                  <div *ngIf="firstnameCtrl.errors.minlength">
+                    Le Prénom doit avoir au moins 2 caractères.
+                  </div>
+              </div>       
+            </div> 
+            <!-- Second field -->
+            <div class="field">
+              <label for="lastname">Nom</label>
+              <div class="ui left icon input">
+                <input type="text" formControlName="lastname" id="lastname" placeholder="Nom" required>
+                <i class="user icon"></i>
+              </div>
+              <div class="ui red label" *ngIf="lastnameCtrl.invalid && lastnameCtrl.touched">
+                <div *ngIf="lastnameCtrl.errors.required">
+                  Le Nom est obligatoire.
+                </div>
+                <div *ngIf="lastnameCtrl.errors.minlength">
+                  Le Nom doit avoir au moins 2 caractères.
+                </div>
+              </div>
+            </div>
+            <!-- Third field -->
+            <div class="field">
+                <label for="birthday">Date de Naissance</label>
+                <div class="ui left icon input">
+                  <input type="date" formControlName="birthday" id="birthday" required>
+                  <i class="birthday cake icon"></i>
+                </div>
+                <div class="ui red label" *ngIf="birthdayCtrl.invalid && birthdayCtrl.touched">
+                  <div *ngIf="birthdayCtrl.errors.required">
+                    La date de naissance est obligatoire.
+                  </div>
+                </div>
+            </div>
+            <!-- fourth field -->
+            <div class="field">
+                <label for="placeOfBirth">Lieu de Naissance</label>
+                <div class="ui left icon input">
+                  <input type="text" formControlName="placeOfBirth" id="placeOfBirth" placeholder="Lieu de Naissance" required>
+                  <i class="building icon"></i>
+                </div>
+                <div class="ui red label" *ngIf="placeOfBirthCtrl.invalid && placeOfBirthCtrl.touched">
+                  <div *ngIf="placeOfBirthCtrl.errors.required">
+                    Le lieu de naissance est obligatoire.
+                  </div>
+                </div>
+            </div>
+            <!-- fifth field -->
+            <div class="field">
+              <label for="sex">Sexe</label>
+              <select formControlName="sex" id="sex" class="ui fluid dropdown" required>
+                <option value="">---Choisir le sexe---</option>
+                <option *ngFor="let option of listeSexe" [value]="option" ng-selected="$first">{{option}}</option>
+                <i class="venus mars icon"></i>
+              </select>
+              <div class="ui red label" *ngIf="sexCtrl.invalid && sexCtrl.touched">
+                <div *ngIf="sexCtrl.errors.required">
+                  Le choix du sexe est obligatoire.
+                </div>
+              </div>
+            </div>
+            <!-- sixth field -->
+            <div class="field">
+              <label for="classOfStudent">Classe</label>
+              <select formControlName="classOfStudent" id="classOfStudent" class="ui fluid dropdown" required>
+                <option value="">---Choisir la classe---</option>
+                <option *ngFor="let option of listeClasse" [value]="option.id" ng-selected="$first">{{option.libelle}}</option>
+              </select>
+              <div class="ui red label" *ngIf="classOfStudentCtrl.invalid && classOfStudentCtrl.touched">
+                <div *ngIf="classOfStudentCtrl.errors.required">
+                  Le choix de la classe est obligatoire.
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="column">
+            <h3 class="ui blue center aligned icon header">
+                <i class="spinner icon"></i>
+                Infos secondaires
+            </h3>
+            <h4 class="ui green center aligned icon header">
+                Tous les champs sont optionnels
+            </h4>
+            <!-- seventh field -->
+            <div class="field">
+              <label for="tutor">Prénom et Nom du Tuteur/Tutrice</label>
+              <div class="ui left icon input">
+                <input type="text" formControlName="tutor" id="tutor" placeholder="Prénom et Nom du Tuteur/Tutrice">
+                <i class="user icon"></i>
+              </div>
+            </div>
+            <!-- eighth field -->
+            <div class="field">
+              <label for="telephone">Téléphone</label>
+              <div class="ui left icon input">
+                <input type="number" formControlName="telephone" id="telephone" placeholder="Téléphone du Tuteur/Tutrice">
+                <i class="phone icon"></i>
+              </div>
+            </div>
+            <!-- ninth field -->
+            <div class="field">
+              <label for="address">Adresse</label>
+              <div class="ui left icon input">
+                <input type="text" formControlName="address" id="address" placeholder="Adresse du Tuteur/Tutrice">
+                <i class="address book icon"></i>
+              </div>
+            </div>
+            <!-- tenth field -->
+            <div class="field">
+              <label for="oldSchool">Ancienne école de l'élève</label>
+              <div class="ui left icon input">
+                <input type="text" formControlName="oldSchool" id="oldSchool" placeholder="Ancienne école de l'élève">
+                <i class="warehouse icon"></i>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="ui horizontal divider"> 
+        <!-- la ligne separatrice -->
+        <div class="field">
+          <button class="big ui teal button" [disabled]="newStudentForm.invalid" type="submit" >Valider</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>
+
+
+
+<!-- [disabled]="newStudentForm.invalid" -->
+<!-- <div *ngIf="firstname.invalid" class="ui error message">
+  <div *ngIf="name.errors.required">
+    Le nom est obligatoire.
+  </div>
+  <div *ngIf="name.errors.minlength">
+    Le nom doit avoir au moins 2 caractères.
+  </div>
+</div> -->
+
+<!-- 
+
+<label for="">Nom</label>
+<div class="ui left icon input">
+  <input type="text" formControlName="" id="" placeholder="" required>
+  <i class="user icon"></i>
+</div>
+ -->

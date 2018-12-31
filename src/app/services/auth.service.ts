@@ -32,10 +32,12 @@ export class AuthService
         {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
+            if(error.status === 401) localStorage.removeItem('userToken');// the token has expired
+            console.log('type de lobjet error '+typeof(error.status))
             console.error(
                     `Backend returned code : ${error.status}`);
-            console.error(
-                        `Backend returned message : ${error.statusText}`);
+            // console.error(
+            //             `Backend returned message : ${error.statusText}`);
         }
         return ObservableThrowError(error || "Erreur serveur")
     }

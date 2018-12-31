@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Spinkit } from 'ng-http-loader'; 
 
 declare var $: any;
 
@@ -9,6 +10,8 @@ declare var $: any;
 })
 export class AppComponent {
   title = 'gpee';
+  public spinkit = Spinkit; //loader
+
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.

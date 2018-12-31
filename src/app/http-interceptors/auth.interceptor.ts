@@ -1,11 +1,12 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
  
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
  
 
-    constructor() { }
+    constructor(private router: Router) { }
  
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         // if (req.headers.get('No-Auth') == "True")
@@ -25,6 +26,8 @@ export class AuthInterceptor implements HttpInterceptor {
             //        // headers: req.headers.set("Authorization",'Basic') //After Autorization make a space
             //     }
             // });
+            localStorage.removeItem('userToken');// the token has expired or user is not connected
+            this.router.navigate(['auth']);
             return next.handle(req.clone()) //this.router.navigateByUrl('/login');
         }
     }

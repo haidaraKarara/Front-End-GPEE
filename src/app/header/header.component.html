@@ -1,4 +1,4 @@
-<div class="ui top attached stackable menu" style="margin-top:0.2em">
+<div class="ui top attached stackable menu">
     <div class="ui container stackable" *ngIf="isAuth">
       <div class="ui item floated header">
           <img class="ui big circular image" src="assets/logo-education.jpg" style="width:3em"/>
@@ -11,7 +11,7 @@
         <span>Accueil</span>
       </a>
       <div class="ui simple dropdown item">
-          <span><i class="users icon"></i> Étudiants</span>       
+          <span><i class="users icon"></i> Élèves</span>       
           <i class="dropdown icon"></i>
           <div class="menu">
             <!-- <a class="item" routerLink="/students"><i class="users icon"></i>Liste des étudiant</a> -->
@@ -32,12 +32,13 @@
       </div>
       <div class="item">
         <div class="ui  action input">
-          <input type="text" placeholder="Matricule étudiant">
+          <input type="text" placeholder="Matricule élève">
           <div class="mini ui button">Go</div>
         </div>
       </div>
-      <p class="item">Suivi de paiment simplifié</p>
+      <!-- <p class="item">Suivi de paiment simplifié</p> -->
       <a class="ui teal label right item" (click)="onSignOut()">Déconnexion</a>
-      
     </div>
+    <router-outlet></router-outlet>
   </div>
+  
